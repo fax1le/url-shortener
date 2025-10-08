@@ -11,9 +11,9 @@ func main() {
 
 	logger := logrus.New()
 
-	app := application.New(cfg, logger)
+	App := app.New(cfg, logger)
 
-	app.Init()
+	App.Init()
 
-	app.Run()
+	App.Run()
 }

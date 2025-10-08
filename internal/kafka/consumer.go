@@ -127,7 +127,7 @@ func (k *KafkaConsumer) Fetcher(ctx context.Context, msgChan chan string, logger
 		case msgChan <- string(msg.Value):
 			batchMap[msg.Partition] = append(batchMap[msg.Partition], msg)
 
-			if len(batchMap[msg.Partition]) == cap(batchMap[msg.Partition]) {
+			if len(batchMap[msg.Partition]) ==  k.Cfg.Kafka.CommitBatchSize {
 				commitCtx, commitCancel := context.WithTimeout(context.Background(), k.Cfg.Kafka.CommitTimeout)
 
 				err := k.Reader.CommitMessages(commitCtx, batchMap[msg.Partition]...)

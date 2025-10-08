@@ -24,13 +24,13 @@ func StartDB(cfg *config.Config) (*PostgresDB, error) {
 
 	DB, err := sql.Open("postgres", dsn)
 
-	DB.SetMaxOpenConns(100)
-	DB.SetMaxIdleConns(20)
-	DB.SetConnMaxLifetime(time.Minute * 5)
-
 	if err != nil {
 		return nil, err
 	}
+
+	DB.SetMaxOpenConns(100)
+	DB.SetMaxIdleConns(20)
+	DB.SetConnMaxLifetime(time.Minute * 5)
 
 	err = DB.Ping()
 
